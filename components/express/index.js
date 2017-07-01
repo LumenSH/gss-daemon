@@ -41,7 +41,7 @@ apiRouter.delete('/gameserver/stop', gameserverRoutes.stop);
 
 // Tokens
 apiRouter.get('/token', tokenRoutes.list_tokens);
-apiRouter.put('/token', tokenRoutes.create_token);
+apiRouter.post('/token', tokenRoutes.create_token);
 apiRouter.delete('/token', tokenRoutes.delete_token);
 
 // Others
