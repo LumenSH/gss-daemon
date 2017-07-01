@@ -16,6 +16,7 @@ module.exports = {
         try {
             gameserverManager.getServerByID(req.body.id).then((server) => {
                 server.start();
+                return res.Response.setStatus(true).output();
             }).catch((error) => {
                 console.error(error);
             })
@@ -28,6 +29,7 @@ module.exports = {
         try {
             gameserverManager.getServerByID(req.body.id).then((server) => {
                 server.stop();
+                return res.Response.setStatus(true).output();
             }).catch((error) => {
                 console.error(error);
             })

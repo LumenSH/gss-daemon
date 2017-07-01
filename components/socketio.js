@@ -53,7 +53,6 @@ class SocketIO {
                 }
             }
         });
-
         socket.on('command', (socketData) => {
             if(gameserverManager.servers[socket.gameserverID]) {
                 try {
@@ -65,7 +64,6 @@ class SocketIO {
                 }
             }
         });
-
         socket.on('status', () => {
             try {
                 if(gameserverManager.servers[socket.gameserverID] !== undefined) {
@@ -79,6 +77,15 @@ class SocketIO {
                 }
             } catch(e) {
                 console.error(`Error emitting server status ${socket.gameserverID}: ${e}`)
+            }
+        });
+        socket.on('log', () => {
+            try {
+                if(gameserverManager.logs[socket.gameserverID] !== undefined) {
+                    socket.emit('log', gameserverManager.logs[socket.gameserverID]);
+                }
+            } catch(e) {
+                console.error(`Error while fetching logs for server ${socket.gameserverID}: ${e}`);
             }
         });
     }

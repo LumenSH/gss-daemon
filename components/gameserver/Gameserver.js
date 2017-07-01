@@ -1,16 +1,11 @@
 'use strict';
 
-const   spawn = require('child_process').spawn,
-        exec = require('child_process').exec;
-
+const spawn = require('child_process').spawn
 
 class Gameserver {
     constructor(data) {
         this.gameserver = data;
         this.startArguments = JSON.parse(data.startParams);
-        if(typeof this.startArguments !== 'object') {
-            this.startArguments = [];
-        }
 
         this.uid = parseInt(10000 + data.userID);
         this.executableName = data.executable;
@@ -20,7 +15,7 @@ class Gameserver {
 
         this.started_at = null;
         this.process = null;
-        this.logs = [];
+        gameserverManager.logs[this.gameserver.id] = [];
     }
     start() {
         if(this.isRunning()) {
@@ -48,9 +43,9 @@ class Gameserver {
                 message: string
             });
 
-            this.logs.push(string);
-            if(this.logs.length > 50) {
-                this.logs.shift();
+            gameserverManager.logs[this.gameserver.id].push(string);
+            if(gameserverManager.logs[this.gameserver.id].length > 50) {
+                gameserverManager.logs[this.gameserver.id].shift();
             }
         });
 
@@ -62,9 +57,9 @@ class Gameserver {
                 message: string
             });
 
-            this.logs.push(string);
-            if(this.logs.length > 50) {
-                this.logs.shift();
+            gameserverManager.logs[this.gameserver.id].push(string);
+            if(gameserverManager.logs[this.gameserver.id].length > 50) {
+                gameserverManager.logs[this.gameserver.id].shift();
             }
         });
 

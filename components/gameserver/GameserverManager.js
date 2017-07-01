@@ -5,6 +5,7 @@ const Gameserver = require('./Gameserver');
 class GameserverManager {
     constructor() {
         this.servers = {};
+        this.logs = {};
     }
     getServerByID(id) {
         return new Promise((resolve, reject) => {
