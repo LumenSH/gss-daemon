@@ -3,7 +3,7 @@
 const   fs = require('fs'),
         YAML = require('yamljs');
 
-global.Sequelize = require('Sequelize');
+global.Sequelize = require('sequelize');
 global.helper = require('./components/helper');
 global.packageConfig = require('./package.json');
 global.config = YAML.load('./config.yml');
