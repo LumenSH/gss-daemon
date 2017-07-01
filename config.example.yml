@@ -1,0 +1,15 @@
+host_id: 1
+db:
+    dbname: gs3
+    username: gs3
+    password: gcPAI8GxBiq4lEgU
+    host: 127.0.0.1
+http:
+    port: 80
+    auth:
+        username: user
+        password: ad
+    ssl:
+        enabled: true
+        cert: pathtokey
+        key: pathtokey
