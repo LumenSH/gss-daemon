@@ -20,9 +20,17 @@ class SocketIO {
                         }
                         this.clients[socket.gameserverID].push(socket);
 
+                        if(gameserverManager.logs[socket.gameserverID] !== undefined) {
+                            gameserverManager.logs[socket.gameserverID].forEach((log) => {
+                                socket.emit('log', {
+                                    message: log
+                                });
+                            });
+                        }
+
                         return this.registerEvents(socket);
                     }
-                    // return socket.disconnect();
+                    return socket.disconnect();
                 });
                 socket.on('disconnect', () => {
                     if (socket.gameserverID) {
@@ -49,7 +57,7 @@ class SocketIO {
                 try {
                     gameserverManager.servers[socket.gameserverID].stop();
                 } catch(e) {
-                    console.error(`Error stopping server ${socket.gameserverID}: ${e}`)
+                    console.error(`Error stopping server ${socket.gameserverID}: ${e.toString()}`)
                 }
             }
         });
@@ -60,7 +68,7 @@ class SocketIO {
                         gameserverManager.servers[socket.gameserverID].sendCommand(socketData.message.toString());
                     }
                 } catch(e) {
-                    console.error(`Error emitting server status ${socket.gameserverID}: ${e}`)
+                    console.error(`Error emitting server status ${socket.gameserverID}: ${e.toString()}`)
                 }
             }
         });
@@ -76,16 +84,20 @@ class SocketIO {
                     });
                 }
             } catch(e) {
-                console.error(`Error emitting server status ${socket.gameserverID}: ${e}`)
+                console.error(`Error emitting server status ${socket.gameserverID}: ${e.toString()}`)
             }
         });
         socket.on('log', () => {
             try {
                 if(gameserverManager.logs[socket.gameserverID] !== undefined) {
-                    socket.emit('log', gameserverManager.logs[socket.gameserverID]);
+                    gameserverManager.logs[socket.gameserverID].forEach((log) => {
+                        socket.emit('log', {
+                            message: log
+                        });
+                    });
                 }
             } catch(e) {
-                console.error(`Error while fetching logs for server ${socket.gameserverID}: ${e}`);
+                console.error(`Error while fetching logs for server ${socket.gameserverID}: ${e.toString()}`);
             }
         });
     }
