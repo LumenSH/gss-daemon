@@ -22,7 +22,7 @@ class SocketIO {
 
                         return this.registerEvents(socket);
                     }
-                    return socket.disconnect();
+                    // return socket.disconnect();
                 });
                 socket.on('disconnect', () => {
                     if (socket.gameserverID) {
