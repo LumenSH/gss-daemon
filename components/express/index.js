@@ -11,7 +11,7 @@ const   fs = require('fs'),
 
 global.app = express();
 if(global.config.http.ssl.enabled === true) {
-    global.server = require('http').createServer({
+    global.server = require('https').createServer({
         cert: fs.readFileSync(global.config.http.ssl.cert),
         key: fs.readFileSync(global.config.http.ssl.key)
     }, app);
