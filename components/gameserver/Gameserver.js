@@ -15,7 +15,9 @@ class Gameserver {
 
         this.started_at = null;
         this.process = null;
-        gameserverManager.logs[this.gameserver.id] = [];
+        if(gameserverManager.logs[this.gameserver.id] === undefined) {
+            gameserverManager.logs[this.gameserver.id] = [];
+        }
     }
     start() {
         if(this.isRunning()) {
@@ -36,7 +38,7 @@ class Gameserver {
             console.error(`Error starting server ${this.gameserver.id}: ${err.toString()}`);
             return false;
         }
-        
+
         this.process.stdin.setEncoding('utf-8');
         this.process.stdout.setEncoding('utf-8');
         this.started_at = Math.round(new Date().getTime() / 1000);
