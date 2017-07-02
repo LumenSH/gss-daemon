@@ -25,7 +25,7 @@ class Gameserver {
         }
 
         try {
-            this.process = spawn(this.executableName, this.startArguments, {
+            this.process = spawn(this.path + this.executableName, this.startArguments, {
                 cwd: this.path,
                 uid: this.uid
             });
