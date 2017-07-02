@@ -48,8 +48,8 @@ class SocketIO {
                 if(server) {
                     server.start();
                 }
-            }).catch(() => {
-                console.error(`Couldn't start server ${socket.gameserverID} (requested by user)`);
+            }).catch((e) => {
+                console.error(`Couldn't start server ${socket.gameserverID} (requested by user): ${e.toString()}`);
             });
         });
         socket.on('stop', () => {

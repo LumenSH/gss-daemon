@@ -24,7 +24,8 @@ global.db = new Sequelize(global.config.db.dbname, global.config.db.username, gl
         collate: 'utf8_general_ci',
         timestamps: false
     },
-    logging: false
+    logging: false,
+    port: global.config.db.port
 });
 
 console.info(`Initialize server daemon..`);
