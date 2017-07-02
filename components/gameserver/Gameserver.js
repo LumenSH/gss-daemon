@@ -1,6 +1,6 @@
 'use strict';
 
-const spawn = require('child_process').spawn
+const spawn = require('child_process').spawn;
 
 class Gameserver {
     constructor(data) {
@@ -26,6 +26,10 @@ class Gameserver {
             this.process = spawn(this.executableName, this.startArguments, {
                 cwd: this.path,
                 uid: this.uid
+            });
+            this.process.on('error', (err) => {
+                this.sendEmit('start-failed', err);
+                console.error(`Server ${this.gameserver.id} crashed: ${err.toString()}`);
             });
         } catch(err) {
             this.process = null;
