@@ -33,7 +33,3 @@ process.on('uncaughtException', function (err) {
         return console['_' + object[0]].apply(this, Array.from(arguments));
     }
 });
-
-setTimeout(function() {
-    console.log(lol());
-}, 3000);
