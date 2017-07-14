@@ -14,3 +14,7 @@ http:
         enabled: true
         cert: pathtokey
         key: pathtokey
+log:
+    enabled: false
+    error: error.log
+    info: info.log

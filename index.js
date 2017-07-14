@@ -8,7 +8,7 @@ global.helper = require('./components/helper');
 global.packageConfig = require('./package.json');
 global.config = YAML.load('./config.yml');
 
-require('./components/colors');
+require('./components/logs');
 require('./components/express');
 
 if(global.config === undefined || global.config === false) {
