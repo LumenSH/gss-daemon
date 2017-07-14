@@ -9,7 +9,15 @@ const   fs = require('fs'),
         apiRouter = express.Router(),
         ApiResponseHandler = require('./express/ResponseHelper');
 
-global.app = express();
+global.app = express()
+    .use(bodyParser.json())
+    .use(ApiResponseHandler)
+    .use(basicAuth(global.config.http.auth.username, global.config.http.auth.password))
+    .use(bodyParser.urlencoded({
+        extended: true
+    }))
+    .disable('x-powered-by');
+
 if(global.config.http.ssl.enabled === true) {
     global.server = require('https').createServer({
         cert: fs.readFileSync(global.config.http.ssl.cert),
@@ -21,14 +29,6 @@ if(global.config.http.ssl.enabled === true) {
 
 global.ioManager = new ioManager(require('socket.io')(global.server));
 global.gameserverManager = new gameserverManager;
-
-app.disable('x-powered-by');
-app.use(bodyParser.json());
-app.use(ApiResponseHandler);
-app.use(basicAuth(global.config.http.auth.username, global.config.http.auth.password));
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
 
 let gameserverRoutes = require('./express/routes/gameserver');
 let tokenRoutes = require('./express/routes/tokens');

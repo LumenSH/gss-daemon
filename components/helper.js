@@ -13,6 +13,6 @@ let helper = {
     byteToMb(bytes) {
         return (bytes/1048576).toFixed(0);
     }
-}
+};
 
 module.exports = helper;

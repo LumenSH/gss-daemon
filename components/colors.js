@@ -6,6 +6,8 @@
 
 const colors = require('colors');
 
+console.debug = console.log;
+
 [
     ['info', 'white'],
     ['log', 'green'],
@@ -24,5 +26,3 @@ const colors = require('colors');
         return console['_' + object[0]].apply(this, Array.from(arguments));
     }
 });
-
-console.debug = console._log;
