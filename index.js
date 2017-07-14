@@ -9,7 +9,7 @@ global.packageConfig = require('./package.json');
 global.config = YAML.load('./config.yml');
 
 require('./components/colors');
-require('./components/express/index');
+require('./components/express');
 
 if(global.config === undefined || global.config === false) {
     console.error(`Couldn't parse config.yml file!`);

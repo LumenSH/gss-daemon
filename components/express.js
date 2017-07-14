@@ -4,10 +4,10 @@ const   fs = require('fs'),
         basicAuth = require('basic-auth-connect'),
         express = require('express'),
         bodyParser = require('body-parser'),
-        ioManager = require('../socketio'),
-        gameserverManager = require('../gameserver/GameserverManager'),
+        ioManager = require('./socketio'),
+        gameserverManager = require('./gameserver/GameserverManager'),
         apiRouter = express.Router(),
-        ApiResponseHandler = require('./ResponseHelper');
+        ApiResponseHandler = require('./express/ResponseHelper');
 
 global.app = express();
 if(global.config.http.ssl.enabled === true) {
@@ -30,8 +30,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-let gameserverRoutes = require('./routes/gameserver');
-let tokenRoutes = require('./routes/tokens');
+let gameserverRoutes = require('./express/routes/gameserver');
+let tokenRoutes = require('./express/routes/tokens');
 
 // Gameserver
 apiRouter.get('/gameserver', gameserverRoutes.list);
@@ -45,7 +45,7 @@ apiRouter.post('/token', tokenRoutes.create_token);
 apiRouter.delete('/token', tokenRoutes.delete_token);
 
 // Others
-apiRouter.get('/monitoring', require('./routes/monitoring'));
+apiRouter.get('/monitoring', require('./express/routes/monitoring'));
 apiRouter.get(['/', '/heartbeat'], (req, res) => {
     res.Response.setStatus(true).setPayload("heartbeat").output();
 });
