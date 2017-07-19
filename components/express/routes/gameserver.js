@@ -26,7 +26,7 @@ module.exports = {
                     return res.Response.setData(server).setStatus(true).output();
                 });
                 pusage.unmonitor(server.process.pid);
-                return res.Response.setData(server).setStatus(true).output();
+                return;
             }
         }
         return res.Response.output();
