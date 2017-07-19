@@ -17,11 +17,11 @@ module.exports = {
             gameserverManager.getServerByID(req.body.id).then((server) => {
                 server.start();
                 return res.Response.setStatus(true).output();
-            }).catch((error) => {
-                console.error(error);
+            }).catch((err) => {
+                console.err(err.stack || err);
             })
-        } catch(error) {
-            console.error(error);
+        } catch(err) {
+            console.err(err.stack || err);
         }
         return res.Response.output();
     },
@@ -30,11 +30,11 @@ module.exports = {
             gameserverManager.getServerByID(req.body.id).then((server) => {
                 server.stop();
                 return res.Response.setStatus(true).output();
-            }).catch((error) => {
-                console.error(error);
+            }).catch((err) => {
+                console.err(err.stack || err);
             })
-        } catch(error) {
-            console.error(error);
+        } catch(err) {
+            console.err(err.stack || err);
         }
         return res.Response.output();
     }
