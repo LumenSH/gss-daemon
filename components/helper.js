@@ -12,6 +12,18 @@ let helper = {
     },
     byteToMb(bytes) {
         return (bytes/1048576).toFixed(0);
+    },
+    listen: (port) => {
+        return new Promise((resolve, reject) => {
+            if (global.server) {
+                global.server.listen(port, (err) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve();
+                });
+            }
+        });
     }
 };
 

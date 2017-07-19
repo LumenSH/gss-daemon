@@ -33,6 +33,8 @@ global.gameserverManager = new gameserverManager;
 let gameserverRoutes = require('./express/routes/gameserver');
 let tokenRoutes = require('./express/routes/tokens');
 
+// Routes
+
 // Gameserver
 apiRouter.get('/gameserver', gameserverRoutes.list);
 apiRouter.get('/gameserver/:id', gameserverRoutes.get);

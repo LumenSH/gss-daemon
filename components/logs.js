@@ -9,7 +9,7 @@ const   colors = require('colors'),
 
 console.debug = console.log;
 
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', (err) => {
     console.error(err.stack)
 });
 
