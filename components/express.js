@@ -5,7 +5,7 @@ const   fs = require('fs'),
         express = require('express'),
         bodyParser = require('body-parser'),
         ioManager = require('./socketio'),
-        gameserverManager = require('./gameserver/GameserverManager'),
+        _gameserverManager = require('./gameserver/GameserverManager'),
         apiRouter = express.Router(),
         ApiResponseHandler = require('./express/ResponseHelper');
 
@@ -28,7 +28,7 @@ if(global.config.http.ssl.enabled === true) {
 }
 
 global.ioManager = new ioManager(require('socket.io')(global.server));
-global.gameserverManager = new gameserverManager;
+global.gameserverManager = new _gameserverManager;
 
 let gameserverRoutes = require('./express/routes/gameserver');
 let tokenRoutes = require('./express/routes/tokens');

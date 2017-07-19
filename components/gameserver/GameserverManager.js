@@ -19,8 +19,8 @@ class GameserverManager {
                     "left join `products` on `products`.`id` = `gameserver`.`productID`" +
                     "left join `gameroot_ip` on `gameroot_ip`.`id` = `gameserver`.`gameRootIpID`" +
                     "left join `users` on `users`.`id` = `gameserver`.`userID`" +
-                    "where `gameserver`.`id` = '" + parseInt(id) + "' limit 1",
-                { type: Sequelize.QueryTypes.SELECT}).then((s) => {
+                    "where `gameserver`.`id` = '?' limit 1",
+                { replacements: [id], type: Sequelize.QueryTypes.SELECT}).then((s) => {
                     if(s.length > 0) {
                         resolve(new Gameserver(s[0]));
                     } else {

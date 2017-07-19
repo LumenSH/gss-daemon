@@ -43,6 +43,10 @@ class Gameserver {
         this.process.stdout.setEncoding('utf-8');
         this.started_at = Math.round(new Date().getTime() / 1000);
 
+        global.db.query('UPDATE gameserver SET bannerOn = ? WHERE id = ?', { replacements: [1, this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
+            console.error(`Error changing bannerOn column for gameserver ${this.gameserver.id}: ${err.toString()}`);
+        });
+
         this.process.stdout.on('data', (data) => {
             let string = data.toString() || "";
             this.sendEmit('log', {
@@ -77,6 +81,10 @@ class Gameserver {
             this.process = null;
             this.sendEmit('status', {
                 status: false
+            });
+
+            global.db.query('UPDATE gameserver SET bannerOn = ? WHERE id = ?', { replacements: [0, this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
+                console.error(`Error changing bannerOn column for gameserver ${this.gameserver.id}: ${err.toString()}`);
             });
 
             delete gameserverManager.servers[this.gameserver.id];
