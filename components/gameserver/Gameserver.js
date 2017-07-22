@@ -5,7 +5,7 @@ const spawn = require('child_process').spawn;
 class Gameserver {
     constructor(data) {
         this.gameserver = data;
-        this.startArguments = JSON.parse(data.startParams);
+        this.gameserver.startParams = JSON.parse(this.gameserver.startParams);
 
         this.uid = parseInt(10000 + data.userID);
         this.executableName = data.executable;
@@ -25,7 +25,7 @@ class Gameserver {
         }
 
         try {
-            this.process = spawn(this.path + this.executableName, this.startArguments, {
+            this.process = spawn(this.path + this.executableName, this.gameserver.startParams, {
                 cwd: this.path,
                 uid: this.uid
             });

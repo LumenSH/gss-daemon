@@ -15,6 +15,7 @@ module.exports = {
                     userID: server.gameserver.userID,
                     uid: server.uid,
                     path: server.path,
+                    gameserver: server.gameserver,
                     usage: {
                         mem: 0,
                         cpu: 0,
