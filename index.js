@@ -11,7 +11,7 @@ global.config = YAML.load('./config.yml');
 require('./components/logs');
 require('./components/express');
 
-if(global.config === undefined || !global.config) {
+if(global.config === undefined || global.config === false) {
     console.error(`Couldn't parse config.yml file!`);
     process.exit(1);
 }
