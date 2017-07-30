@@ -1,5 +1,7 @@
 'use strict';
 
+// test commit
+
 const   fs = require('fs'),
         YAML = require('yamljs');
 
