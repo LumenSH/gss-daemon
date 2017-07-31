@@ -1,9 +1,5 @@
 'use strict';
 
-/*
- *  GSS Server Daemon
- */
-
 const   fs = require('fs'),
         YAML = require('yamljs');
 
