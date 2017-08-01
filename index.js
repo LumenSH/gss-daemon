@@ -16,27 +16,18 @@ if(global.config === undefined || global.config === false) {
     process.exit(1);
 }
 
-global.db = new Sequelize(global.config.db.dbname, global.config.db.username, global.config.db.password, {
-    host: global.config.db.host,
-    port: global.config.db.port,
-    dialect: "mysql",
-    define: {
-        charset: 'utf8',
-        collate: 'utf8_general_ci',
-        timestamps: false
-    },
-    logging: false,
-});
+helper.db.connect();
 
 console.info(`Initialize server daemon..`);
-helper.syncDatabase().then(() => {
+helper.db.init().then(() => {
     helper.listen(global.config.http.port).then(() => {
         console.info(`API is listening on port ${global.config.http.port}`);
         console.info(`Ready to serve some gameservers!`);
+        helper.db.checkConnection();
     }).catch((err) => {
         console.error(`Error starting listening on port ${global.config.http.port}: ${err.toString()}`);
         process.exit(1);
     });
-}).catch((e) => {
-    console.error(`Error running Sequelize.sync: ${e.toString()}`);
+}).catch(() => {
+    //
 });
