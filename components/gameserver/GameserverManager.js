@@ -24,7 +24,7 @@ class GameserverManager {
                     if(s.length > 0) {
                         resolve(new Gameserver(s[0]));
                     } else {
-                        reject();
+                        reject(new Error('Cant find server with ID ' + id));
                     }
             }).catch((e) => {
                 console.error(`DB Query Error: ${e}`);

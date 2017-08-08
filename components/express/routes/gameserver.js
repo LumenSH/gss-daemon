@@ -46,10 +46,10 @@ module.exports = {
                 server.start();
                 return res.Response.setStatus(true).output();
             }).catch((err) => {
-                console.err(err.stack || err);
+                console.error(err.stack || err);
             })
         } catch(err) {
-            console.err(err.stack || err);
+            console.error(err.stack || err);
         }
         return res.Response.output();
     },
@@ -59,10 +59,10 @@ module.exports = {
                 server.stop();
                 return res.Response.setStatus(true).output();
             }).catch((err) => {
-                console.err(err.stack || err);
+                console.error(err.stack || err);
             })
         } catch(err) {
-            console.err(err.stack || err);
+            console.error(err.stack || err);
         }
         return res.Response.output();
     },
@@ -73,7 +73,7 @@ module.exports = {
                 return res.Response.setStatus(true).output();
             }
         } catch(err) {
-            console.err(err.stack || err);
+            console.error(err.stack || err);
         }
         return res.Response.setStatus(false).output();
     }
