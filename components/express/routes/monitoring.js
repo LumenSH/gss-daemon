@@ -9,7 +9,8 @@ module.exports = (req, res) => {
         cpu: {
             loadavg: os.loadavg(),
             architecture: os.arch(),
-            model: cpus[0].model
+            model: cpus[0].model,
+            cores: cpus.length
         },
         mem: {
             total: helper.byteToMb(os.totalmem()),
