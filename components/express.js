@@ -38,8 +38,9 @@ let tokenRoutes = require('./express/routes/tokens');
 // Gameserver
 apiRouter.get('/gameserver', gameserverRoutes.list);
 apiRouter.get('/gameserver/:id', gameserverRoutes.get);
-apiRouter.put('/gameserver/start', gameserverRoutes.start);
-apiRouter.delete('/gameserver/stop', gameserverRoutes.stop);
+apiRouter.post('/gameserver/start', gameserverRoutes.start);
+apiRouter.post('/gameserver/stop', gameserverRoutes.stop);
+apiRouter.post('/gameserver/clear', gameserverRoutes.clear_logs);
 
 // Tokens
 apiRouter.get('/token', tokenRoutes.list_tokens);

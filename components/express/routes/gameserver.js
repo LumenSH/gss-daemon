@@ -65,5 +65,16 @@ module.exports = {
             console.err(err.stack || err);
         }
         return res.Response.output();
+    },
+    clear_logs: (req, res) => {
+        try {
+            if(gameserverManager.logs[req.body.id] !== undefined) {
+                gameserverManager.logs[req.body.id] = [];
+                return res.Response.setStatus(true).output();
+            }
+        } catch(err) {
+            console.err(err.stack || err);
+        }
+        return res.Response.setStatus(false).output();
     }
 };
