@@ -28,6 +28,6 @@ class ResponseHelper {
 }
 
 module.exports = (req, res, next) => {
-    res.Response = new ResponseHelper(res);
+    res.ApiResponse = new ResponseHelper(res);
     next();
 };

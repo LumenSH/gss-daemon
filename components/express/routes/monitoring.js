@@ -4,7 +4,7 @@ const os = require('os');
 
 module.exports = (req, res) => {
     let cpus = os.cpus();
-    res.Response.setStatus(true).setPayload({
+    res.ApiResponse.setStatus(true).setPayload({
         hostname: os.hostname(),
         cpu: {
             loadavg: os.loadavg(),
