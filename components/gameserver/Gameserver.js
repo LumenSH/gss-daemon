@@ -24,10 +24,18 @@ class Gameserver {
             return false;
         }
 
+		let executeableName = this.path + this.executableName;
+		if (this.executableName.substr(0, 1) === '/') {
+			executeableName = this.executableName;
+		}
+
         try {
-            this.process = spawn(this.path + this.executableName, this.gameserver.startParams, {
+            this.process = spawn(executeableName, this.gameserver.startParams, {
                 cwd: this.path,
-                uid: this.uid
+                uid: this.uid,
+                env: {
+                	'LD_LIBRARY_PATH': this.path + ':' + this.path + 'bin'
+                }
             });
             this.process.on('error', (err) => {
                 this.sendEmit('start-failed', err);
