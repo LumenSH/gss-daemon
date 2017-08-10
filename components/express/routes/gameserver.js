@@ -39,6 +39,8 @@ module.exports = {
                 } else {
                     res.ApiResponse.setStatus(false).output();
                 }
+            } else {
+                res.ApiResponse.setStatus(false).output();
             }
         }
     },
