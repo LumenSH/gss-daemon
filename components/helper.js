@@ -53,7 +53,7 @@ let helper = {
         }
     },
     byteToMb(bytes) {
-        return (bytes/1048576).toFixed(0);
+        return parseInt((bytes/1048576).toFixed(0));
     },
     listen: (port) => {
         return new Promise((resolve, reject) => {

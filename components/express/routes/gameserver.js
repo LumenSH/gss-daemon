@@ -32,7 +32,7 @@ module.exports = {
                     } else {
                         console.error(`Error while getting PID usage for process ${server.process.pid}: ${err.toString()}`);
                     }
-                    return res.ApiResponse.setData(data).setStatus(true).output();
+                    res.ApiResponse.setData(data).setStatus(true).output();
                 });
                 pusage.unmonitor(server.process.pid);
             }
