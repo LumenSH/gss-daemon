@@ -50,7 +50,7 @@ apiRouter.delete('/token', tokenRoutes.delete_token);
 // Others
 apiRouter.get('/monitoring', require('./express/routes/monitoring'));
 apiRouter.get(['/', '/heartbeat'], (req, res) => {
-    res.Response.setStatus(true).setPayload("heartbeat").output();
+    res.ApiResponse.setStatus(true).setPayload("heartbeat").output();
 });
 
 app.use('/api/v1', apiRouter);
