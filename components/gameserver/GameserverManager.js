@@ -10,7 +10,7 @@ class GameserverManager {
     getServerByID(id) {
         return new Promise((resolve, reject) => {
             if(this.servers[id]) {
-                return this.servers[id];
+                resolve(this.servers[id]);
             }
             db.query(
                     "select `gameserver`.`id`, `gameserver`.`gameRootIpID`, `gameserver`.`productID`," +
@@ -28,6 +28,7 @@ class GameserverManager {
                     }
             }).catch((e) => {
                 console.error(`DB Query Error: ${e}`);
+                reject(new Error("DB Query Error"));
             });
         });
     }

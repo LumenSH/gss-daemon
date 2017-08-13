@@ -62,9 +62,11 @@ module.exports = {
                 server.stop();
                 res.ApiResponse.setStatus(true).output();
             }).catch((err) => {
+		res.ApiResponse.setStatus(false).output();
                 console.error(err.stack || err);
             })
         } catch(err) {
+            res.ApiResponse.setStatus(false).output();
             console.error(err.stack || err);
         }
     },
