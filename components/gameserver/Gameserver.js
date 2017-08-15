@@ -34,7 +34,8 @@ class Gameserver {
                 cwd: this.path,
                 uid: this.uid,
                 env: {
-                	'LD_LIBRARY_PATH': this.path + ':' + this.path + 'bin'
+                	'LD_LIBRARY_PATH': this.path + ':' + this.path + 'bin',
+                    'TZ': this.gameserver.timezone || "Europe/Berlin"
                 }
             });
             this.process.on('error', (err) => {

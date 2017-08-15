@@ -15,7 +15,7 @@ class GameserverManager {
             db.query(
                     "select `gameserver`.`id`, `gameserver`.`gameRootIpID`, `gameserver`.`productID`," +
                     "`gameserver`.`userID`, `gameserver`.`port`, `gameserver`.`startParams`, `products`.`executable`," +
-                    "`products`.`internalName`, `gameroot_ip`.`ip`, `users`.`Inhibition` from `gameserver`" +
+                    "`products`.`internalName`, `gameroot_ip`.`ip`, `users`.`Inhibition`, `users`.`Inhibition`, `users`.`timezone` from `gameserver`" +
                     "left join `products` on `products`.`id` = `gameserver`.`productID`" +
                     "left join `gameroot_ip` on `gameroot_ip`.`id` = `gameserver`.`gameRootIpID`" +
                     "left join `users` on `users`.`id` = `gameserver`.`userID`" +
