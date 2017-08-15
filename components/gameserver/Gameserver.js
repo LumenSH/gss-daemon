@@ -50,12 +50,24 @@ class Gameserver {
         this.process.stdin.setEncoding('utf-8');
         this.process.stdout.setEncoding('utf-8');
         this.started_at = Math.round(new Date().getTime() / 1000);
+        this.last_log = {time: this.started_at, count: 0};
 
         global.db.query('UPDATE gameserver SET bannerOn = ? WHERE id = ?', { replacements: [1, this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
             console.error(`Error changing bannerOn column for gameserver ${this.gameserver.id}: ${err.toString()}`);
         });
 
         this.process.stdout.on('data', (data) => {
+            let timestamp = Math.round(new Date().getTime() / 1000);
+            if(this.last_log.time === timestamp) {
+                if(this.last_log.count >= 50) {
+                    return;
+                } else {
+                    this.last_log.count += 1;
+                }
+            } else {
+                this.last_log = {time: timestamp, count: 1};
+            }
+
             let string = data.toString() || "";
             this.sendEmit('log', {
                 message: string
