@@ -120,12 +120,13 @@ class Gameserver {
     }
     stop() {
         if(this.isRunning()) {
-            this.process.kill('SIGHUP');
+            /* this.process.kill('SIGHUP');
             setTimeout(() => {
                 if(this.process) {
                     this.process.kill('SIGINT');
                 }
-            }, 10000);
+            }, 10000); */
+            this.process.kill('SIGINT');
         }
     }
     isRunning() {
