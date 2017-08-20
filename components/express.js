@@ -44,8 +44,8 @@ apiRouter.post('/gameserver/clear', gameserverRoutes.clear_logs);
 
 // Tokens
 apiRouter.get('/token', tokenRoutes.list_tokens);
-apiRouter.post('/token', tokenRoutes.create_token);
-apiRouter.delete('/token', tokenRoutes.delete_token);
+apiRouter.post('/token/create', tokenRoutes.create_token);
+apiRouter.post('/token/delete', tokenRoutes.delete_token);
 
 // Others
 apiRouter.get('/monitoring', require('./express/routes/monitoring'));
