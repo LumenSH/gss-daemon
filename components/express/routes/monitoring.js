@@ -16,8 +16,8 @@ module.exports = (req, res) => {
             },
             mem: {
                 total: helper.byteToMb(mem_data.total),
-                available: helper.byteToMb(mem_data.free),
-                in_use: helper.byteToMb(mem_data.total - mem_data.free)
+                available: helper.byteToMb(mem_data.available),
+                in_use: helper.byteToMb(mem_data.total - mem_data.available)
             },
             uptime: {
                 daemon: process.uptime().toFixed(0),
