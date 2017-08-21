@@ -26,7 +26,7 @@ class Gameserver {
 
 		let executeableName = this.path + this.executableName;
 		if (this.executableName.substr(0, 1) === '/') {
-			executeableName = this.executableName;
+		    executeableName = this.executableName;
 		}
 
         try {
@@ -34,7 +34,7 @@ class Gameserver {
                 cwd: this.path,
                 uid: this.uid,
                 env: {
-                	'LD_LIBRARY_PATH': this.path + ':' + this.path + 'bin',
+                    'LD_LIBRARY_PATH': this.path + ':' + this.path + 'bin',
                     'TZ': this.gameserver.timezone || "Europe/Berlin"
                 }
             });
@@ -120,12 +120,6 @@ class Gameserver {
     }
     stop() {
         if(this.isRunning()) {
-            /* this.process.kill('SIGHUP');
-            setTimeout(() => {
-                if(this.process) {
-                    this.process.kill('SIGINT');
-                }
-            }, 10000); */
             this.process.kill('SIGINT');
         }
     }
