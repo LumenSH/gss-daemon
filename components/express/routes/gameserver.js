@@ -31,7 +31,7 @@ module.exports = {
                                 mem: helper.byteToMb(stat.memory)
                             };
                         } else {
-                            console.error(`Error while getting PID usage for process ${server.process.pid}: ${err.toString()}`);
+                            console.error(`Error while getting PID usage for process ${server.process.pid} (Server ${server.gameserver.id}): ${err.toString()}`);
                         }
                         res.ApiResponse.setData(data).setStatus(true).output();
                     });
@@ -62,7 +62,7 @@ module.exports = {
                 server.stop();
                 res.ApiResponse.setStatus(true).output();
             }).catch((err) => {
-		res.ApiResponse.setStatus(false).output();
+		    res.ApiResponse.setStatus(false).output();
                 console.error(err.stack || err);
             })
         } catch(err) {
