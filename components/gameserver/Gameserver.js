@@ -23,11 +23,10 @@ class Gameserver {
         if(this.isRunning()) {
             return false;
         }
-
-		let executeableName = this.path + this.executableName;
-		if (this.executableName.substr(0, 1) === '/') {
-		    executeableName = this.executableName;
-		}
+        let executeableName = this.path + this.executableName;
+        if (this.executableName.substr(0, 1) === '/') {
+            executeableName = this.executableName;
+        }
 
         try {
             if(typeof this.gameserver.startParams !== 'object') {
