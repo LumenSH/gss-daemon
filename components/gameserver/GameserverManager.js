@@ -20,7 +20,7 @@ class GameserverManager {
                     "left join `gameroot_ip` on `gameroot_ip`.`id` = `gameserver`.`gameRootIpID`" +
                     "left join `users` on `users`.`id` = `gameserver`.`userID`" +
                     "where `gameserver`.`id` = '?' AND `gameserver`.`gameRootID` = '?' limit 1",
-                { replacements: [id], type: Sequelize.QueryTypes.SELECT}).then((s) => {
+                { replacements: [id, config.host_id], type: Sequelize.QueryTypes.SELECT}).then((s) => {
                     if(s.length > 0) {
                         resolve(new Gameserver(s[0]));
                     } else {
