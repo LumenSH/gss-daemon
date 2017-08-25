@@ -31,7 +31,7 @@ module.exports = {
                                 mem: helper.byteToMb(stat.memory)
                             };
                         } else {
-                        	console.error(`Error while getting PID usage for process ${server.process.pid} (Server ${server.gameserver.id}): ${err.toString()}`);
+                            console.error(`Error while getting PID usage for process ${server.process.pid} (Server ${server.gameserver.id}): ${err.toString()}`);
                         }
                         res.ApiResponse.setData(data).setStatus(true).output();
                     });

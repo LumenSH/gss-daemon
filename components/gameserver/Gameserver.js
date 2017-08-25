@@ -30,7 +30,7 @@ class Gameserver {
 		}
 
         try {
-			if(typeof this.gameserver.startParams !== 'object') {
+		    if(typeof this.gameserver.startParams !== 'object') {
 		        this.gameserver.startParams = [];
 		        console.warn(`Warning: No start arguments given for server ${this.gameserver.id} - Using default params!`);
 		    }
