@@ -33,12 +33,19 @@ class SocketIO {
                     return socket.disconnect();
                 });
                 socket.on('disconnect', () => {
-                    if (socket.gameserverID) {
-                        delete this.clients[socket.gameserverID];
+                    try {
+                        if (socket.gameserverID) {
+                            delete this.clients[socket.gameserverID];
+                        }
+                    } catch(e) {
+                        Raven.captureException(e);
+                        console.error(e.stack || e);
                     }
+                    
                 });
-            } catch(error) {
-                console.error(`Error while authenticating from client ${socket.handshake.address.address}: ${error}`);
+            } catch(e) {
+                Raven.captureException(e);
+                console.error(`Error while authenticating from client ${socket.handshake.address.address}: ${e.toString()}`);
             }
         });
     }
@@ -49,6 +56,7 @@ class SocketIO {
                     server.start();
                 }
             }).catch((e) => {
+                Raven.captureException(e);
                 console.error(`Couldn't start server ${socket.gameserverID} (requested by user): ${e.toString()}`);
             });
         });
@@ -57,19 +65,21 @@ class SocketIO {
                 try {
                     gameserverManager.servers[socket.gameserverID].stop();
                 } catch(e) {
+                    Raven.captureException(e);
                     console.error(`Error stopping server ${socket.gameserverID}: ${e.toString()}`)
                 }
             }
         });
         socket.on('command', (socketData) => {
-            if(gameserverManager.servers[socket.gameserverID]) {
-                try {
+            try {
+                if(gameserverManager.servers[socket.gameserverID]) {
                     if(socketData.message !== undefined) {
                         gameserverManager.servers[socket.gameserverID].sendCommand(socketData.message.toString());
                     }
-                } catch(e) {
-                    console.error(`Error emitting server status ${socket.gameserverID}: ${e.toString()}`)
                 }
+            } catch(e) {
+                Raven.captureException(e);
+                console.error(`Error emitting server status ${socket.gameserverID}: ${e.toString()}`)
             }
         });
         socket.on('status', () => {
@@ -84,6 +94,7 @@ class SocketIO {
                     });
                 }
             } catch(e) {
+                Raven.captureException(e);
                 console.error(`Error emitting server status ${socket.gameserverID}: ${e.toString()}`)
             }
         });
@@ -97,6 +108,7 @@ class SocketIO {
                     });
                 }
             } catch(e) {
+                Raven.captureException(e);
                 console.error(`Error while fetching logs for server ${socket.gameserverID}: ${e.toString()}`);
             }
         });

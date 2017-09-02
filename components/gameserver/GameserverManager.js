@@ -27,6 +27,7 @@ class GameserverManager {
                         reject(new Error('Cant find server with ID ' + id));
                     }
             }).catch((e) => {
+                Raven.captureException(e);
                 console.error(`DB Query Error: ${e}`);
                 reject(new Error("DB Query Error"));
             });

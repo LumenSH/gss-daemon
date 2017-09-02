@@ -41,13 +41,14 @@ class Gameserver {
                     'TZ': this.gameserver.timezone || "Europe/Berlin"
                 }
             });
-            this.process.on('error', (err) => {
-                this.sendEmit('start-failed', err);
-                console.error(`Server ${this.gameserver.id} crashed: ${err.toString()}`);
+            this.process.on('error', (e) => {
+                this.sendEmit('start-failed', e);
+                console.error(`Server ${this.gameserver.id} crashed: ${e.toString()}`);
             });
-        } catch(err) {
+        } catch(e) {
             this.process = null;
-            console.error(`Error starting server ${this.gameserver.id}: ${err.toString()}`);
+            Raven.captureException(e);
+            console.error(`Error starting server ${this.gameserver.id}: ${e.toString()}`);
             return false;
         }
 
