@@ -10,7 +10,6 @@ class Gameserver {
         this.uid = parseInt(10000 + data.userID);
         this.executableName = data.executable;
 
-        // '/home/user'.$this->getOwner().'/'.$this->gsData['game'].'_'.str_replace('.', '_', $this->gsData['IP']).'_'.$this->gsData['port'].'/'.$dir;
         this.path = '/home/user' + data.userID + "/" + data.internalName + "_" + data.ip.replace(/\./g, '_') + '_' + data.port + '/';
 
         this.started_at = null;
@@ -57,12 +56,8 @@ class Gameserver {
         this.started_at = Math.round(new Date().getTime() / 1000);
         this.last_log = {time: this.started_at, count: 0};
 
-        global.db.query('UPDATE gameserver SET bannerOn = ? WHERE id = ?', { replacements: [1, this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
-            console.error(`Error updating bannerOn column for gameserver ${this.gameserver.id}: ${err.toString()}`);
-        });
-
-        global.db.query('UPDATE gameserver SET onlineAt = ? WHERE id = ?', { replacements: [(new Date()).toISOString().substring(0, 10), this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
-            console.error(`Error updating onlineAt column for gameserver ${this.gameserver.id}: ${err.toString()}`);
+        global.db.query('UPDATE gameserver SET bannerOn = ?, onlineAt = ? WHERE id = ?', { replacements: [1, new Date()).toISOString().substring(0, 10), this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
+            console.error(`Error updating bannerOn/onlineAt for gameserver ${this.gameserver.id}: ${err.toString()}`);
         });
 
         this.process.stdout.on('data', (data) => {
@@ -112,8 +107,11 @@ class Gameserver {
                 status: false
             });
 
-            global.db.query('UPDATE gameserver SET bannerOn = ? WHERE id = ?', { replacements: [0, this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
-                console.error(`Error changing bannerOn column for gameserver ${this.gameserver.id}: ${err.toString()}`);
+            global.db.query('UPDATE gameserver SET bannerOn = ? WHERE id = ?', { 
+                replacements: [0, this.gameserver.id], 
+                type: Sequelize.QueryTypes.UPDATE}
+            ).catch((err) => {
+                console.error(`Error changing bannerOn for gameserver ${this.gameserver.id}: ${err.toString()}`);
             });
 
             delete gameserverManager.servers[this.gameserver.id];
