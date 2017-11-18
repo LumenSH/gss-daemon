@@ -56,7 +56,7 @@ class Gameserver {
         this.started_at = Math.round(new Date().getTime() / 1000);
         this.last_log = {time: this.started_at, count: 0};
 
-        global.db.query('UPDATE gameserver SET bannerOn = ?, onlineAt = ? WHERE id = ?', { replacements: [1, new Date()).toISOString().substring(0, 10), this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
+        global.db.query('UPDATE gameserver SET bannerOn = ?, onlineAt = ? WHERE id = ?', { replacements: [1, new Date().toISOString().substring(0, 10), this.gameserver.id], type: Sequelize.QueryTypes.UPDATE}).catch((err) => {
             console.error(`Error updating bannerOn/onlineAt for gameserver ${this.gameserver.id}: ${err.toString()}`);
         });
 
